@@ -1,0 +1,43 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+
+    - name: Restore dependencies
+      run: dotnet restore Announcements.sln
+
+    - name: Build
+      run: dotnet build Announcements.sln --no-restore 
+
+    - name: Test Infrastructure Project
+      run: dotnet test ./tests/Infrastructure.Tests/Infrastructure.Tests.csproj --no-build --verbosity normal --logger "trx;LogFileName=InfrastructureTests.trx"
+
+    - name: Test Application Project
+      run: dotnet test ./tests/Application.Tests/Application.Tests.csproj --no-build --verbosity normal --logger "trx;LogFileName=ApplicationTests.trx"
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          **/TestResults/*.trx
