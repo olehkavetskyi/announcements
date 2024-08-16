@@ -13,9 +13,9 @@ public class AnnouncementRepository : IAnnouncementRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Announcement>> GetAllAsync()
+    public IQueryable<Announcement> GetAll()
     {
-        return await _context.Announcements.ToListAsync();
+        return _context.Announcements.AsQueryable();
     }
 
     public async Task<Announcement?> GetByIdAsync(Guid id)
