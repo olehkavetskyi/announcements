@@ -1,4 +1,5 @@
-﻿using Infrastructure.Data;
+﻿using Application.Interfaces;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,8 @@ public static class DependencyInjection
         {
             options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         });
+
+        services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
 
 
         return services;
