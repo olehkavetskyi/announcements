@@ -14,14 +14,30 @@ public class AnnouncementService : IAnnouncementService
         _announcementRepository = announcementRepository;
     }
 
-    public async Task DeleteAnnouncementAsync(Guid id)
+    public async Task AddAsync(Announcement announcement)
+    {
+        announcement.DateAdded = DateTime.UtcNow;
+        await _announcementRepository.AddAsync(announcement);
+    }
+
+    public async Task UpdateAsync(Announcement announcement)
+    {
+        await _announcementRepository.UpdateAsync(announcement);
+    }
+
+    public async Task DeleteAsync(Guid id)
     {
         await _announcementRepository.DeleteAsync(id);
     }
 
-    public async Task<List<Announcement>> GetAnnouncementsAsync()
+    public async Task<List<Announcement>> GetAsync()
     {
         return await _announcementRepository.GetAll().ToListAsync();
+    }
+
+    public async Task<Announcement?> GetByIdAsync(Guid id)
+    {
+        return await _announcementRepository.GetByIdAsync(id);
     }
 
     public async Task<List<Announcement>> GetSimilarAnnouncementsAsync(Guid id)
@@ -46,11 +62,6 @@ public class AnnouncementService : IAnnouncementService
         }
 
         return similarAnnouncements;
-    }
-
-    public async Task UpdateAnnouncementAsync(Announcement announcement)
-    {
-        await _announcementRepository.UpdateAsync(announcement);
     }
 
     private bool HasSimilarWords(string text1, string text2)
