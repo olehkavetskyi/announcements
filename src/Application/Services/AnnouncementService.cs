@@ -2,7 +2,6 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Application.Services;
 
 public class AnnouncementService : IAnnouncementService
@@ -49,12 +48,15 @@ public class AnnouncementService : IAnnouncementService
             return [];
         }
 
-        var similarAnnouncements = await _announcementRepository.GetAll()
-            .Where(a => a.Id != id &&
-                        (HasSimilarWords(targetAnnouncement.Title, a.Title) ||
-                         HasSimilarWords(targetAnnouncement.Description, a.Description)))
+        var potentialMatches = await _announcementRepository.GetAll()
+            .Where(a => a.Id != id)
+            .ToListAsync(); 
+
+        var similarAnnouncements = potentialMatches
+            .Where(a => HasSimilarWords(targetAnnouncement.Title, a.Title) &&
+                        HasSimilarWords(targetAnnouncement.Description, a.Description))
             .Take(3)
-            .ToListAsync();
+            .ToList();
 
         if (similarAnnouncements == null)
         {
