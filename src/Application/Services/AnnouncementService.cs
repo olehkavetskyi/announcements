@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services;
 
@@ -31,7 +30,7 @@ public class AnnouncementService : IAnnouncementService
 
     public async Task<List<Announcement>> GetAsync()
     {
-        return await _announcementRepository.GetAll().ToListAsync();
+        return await _announcementRepository.GetAllAsync();
     }
 
     public async Task<Announcement?> GetByIdAsync(Guid id)
@@ -48,12 +47,10 @@ public class AnnouncementService : IAnnouncementService
             return [];
         }
 
-        var potentialMatches = await _announcementRepository.GetAll()
-            .Where(a => a.Id != id)
-            .ToListAsync(); 
+        var potentialMatches = await _announcementRepository.GetAllAsync();
 
         var similarAnnouncements = potentialMatches
-            .Where(a => HasSimilarWords(targetAnnouncement.Title, a.Title) &&
+            .Where(a => a.Id != id && HasSimilarWords(targetAnnouncement.Title, a.Title) &&
                         HasSimilarWords(targetAnnouncement.Description, a.Description))
             .Take(3)
             .ToList();

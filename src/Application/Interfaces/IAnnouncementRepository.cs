@@ -1,11 +1,10 @@
 ﻿using Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Interfaces;
 
 public interface IAnnouncementRepository
 {
-    IQueryable<Announcement> GetAll();
+    Task<List<Announcement>> GetAllAsync();
     Task AddAsync(Announcement announcement);
     Task<Announcement?> GetByIdAsync(Guid id);
     Task UpdateAsync(Announcement announcement);

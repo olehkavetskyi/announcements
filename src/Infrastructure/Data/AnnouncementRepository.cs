@@ -19,9 +19,9 @@ public class AnnouncementRepository : IAnnouncementRepository
         await _context.SaveChangesAsync();
     }
 
-    public IQueryable<Announcement> GetAll()
+    public async Task<List<Announcement>> GetAllAsync()
     {
-        return _context.Announcements.AsQueryable();
+        return await _context.Announcements.ToListAsync();
     }
 
     public async Task<Announcement?> GetByIdAsync(Guid id)
