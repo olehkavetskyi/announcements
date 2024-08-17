@@ -1,0 +1,30 @@
+<div class="announcement-list">
+
+  <h2 class="announcement-list__title">Announcements</h2>
+  <div class="announcement-list__content">
+    @if (announcementList.length == 0) {
+      <div class="announcement-list__empty-message">
+        <h2>No announcements</h2>
+      </div>
+    } @else {
+      <table class="announcement-list__table">
+        <thead class="announcement-list__table-head">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody class="announcement-list__table-body">
+        @for(announcement of announcementList; track announcement.id) {
+          <tr class="announcement-list__table-row">
+            <td class="announcement-list__table-cell">{{ announcement.title }}</td>
+            <td class="announcement-list__table-cell">{{ announcement.description }}</td>
+            <td class="announcement-list__table-cell">{{ announcement.dateAdded | date}}</td>
+          </tr>
+        } 
+      </tbody>
+    </table>
+  }
+  </div>
+</div>
