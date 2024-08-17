@@ -15,4 +15,8 @@ export class AnnouncementService {
   getAllAnnouncements(): Observable<Announcement[]> {
     return this.http.get<Announcement[]>(`${this.apiUrl}/announcement/all`)
   }
+
+  deleteAnnouncement(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/announcement/delete/${id}`)
+  }
 }
