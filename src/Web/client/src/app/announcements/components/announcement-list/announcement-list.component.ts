@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AnnouncementService } from '../../services/announcement.service';
 import { Announcement } from '../../models/announcement';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-announcement-list',
@@ -10,9 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     DatePipe,
     MatIconModule,
+    CommonModule, RouterModule
   ],
   providers: [
     AnnouncementService,
+
   ],
   templateUrl: './announcement-list.component.html',
   styleUrl: './announcement-list.component.scss'
@@ -29,8 +32,12 @@ export class AnnouncementListComponent implements OnInit {
   getAnnouncementList(): void {
     this.announcementService.getAllAnnouncements().subscribe({
       next: (response) => this.announcementList = response,
-      error: (err) => console.log('error')
+      error: (err) => console.log('err')
     });
+  }
+
+  editAnnouncement(id: string): void {
+
   }
 
   deleteAnnouncement(id: string): void {

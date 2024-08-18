@@ -72,6 +72,14 @@
     text-align: center; 
   }
 
+  &__edit-btn {
+    color: orange;
+
+    &:hover {
+      color: rgb(231, 153, 8);
+    }
+  }
+
   &__delete-btn {
     color: red; 
     

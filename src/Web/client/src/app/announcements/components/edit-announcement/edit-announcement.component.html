@@ -1,0 +1,14 @@
+<div class="edit-announcement">
+  <div class="edit-announcement__form">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="edit-form">
+      <h2 class="edit-announcement">Edit Announcement</h2>
+          <app-custom-input [formControl]="editForm.controls['title']"></app-custom-input>
+          <app-custom-input [formControl]="editForm.controls['description']"></app-custom-input>
+          <app-custom-input [formControl]="editForm.controls['dateAdded']" type="datetime-local"></app-custom-input>
+          <div class="edit-announcement__actions">
+            <a routerLink="/">Back</a>
+            <button type="submit" class="submit-button" [disabled]="!editForm.valid || !editForm.dirty ">Edit</button>
+          </div>
+    </form>
+  </div>
+</div>

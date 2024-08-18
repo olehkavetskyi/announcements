@@ -13,10 +13,18 @@ export class AnnouncementService {
   constructor(private http: HttpClient) { }
 
   getAllAnnouncements(): Observable<Announcement[]> {
-    return this.http.get<Announcement[]>(`${this.apiUrl}/announcement/all`)
+    return this.http.get<Announcement[]>(`${this.apiUrl}/announcement/all`);
+  }
+
+  getAnnouncementById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/announcement/${id}`);
+  }
+
+  editAnnouncement(announcement: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/announcement/update?id=${announcement.id}`, announcement);
   }
 
   deleteAnnouncement(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/announcement/delete/${id}`)
+    return this.http.delete(`${this.apiUrl}/announcement/delete/${id}`);
   }
 }
