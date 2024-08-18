@@ -4,6 +4,7 @@ import { Announcement } from '../../models/announcement';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { AddAnnouncementComponent } from "../add-announcement/add-announcement.component";
 
 @Component({
   selector: 'app-announcement-list',
@@ -11,8 +12,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     DatePipe,
     MatIconModule,
-    CommonModule, RouterModule
-  ],
+    AddAnnouncementComponent,
+    CommonModule, RouterModule,
+    AddAnnouncementComponent
+],
   providers: [
     AnnouncementService,
 
@@ -22,6 +25,7 @@ import { RouterModule } from '@angular/router';
 })
 export class AnnouncementListComponent implements OnInit {
   announcementList: Announcement[] = [];
+  showAddForm: boolean = false;
 
   constructor(private announcementService: AnnouncementService) {}
 
@@ -36,8 +40,16 @@ export class AnnouncementListComponent implements OnInit {
     });
   }
 
-  editAnnouncement(id: string): void {
+  onAnnouncementAdded(announcement: Announcement): void {
+    console.log('hello')
+    this.announcementList = [
+      ...this.announcementList,
+      announcement
+    ];
+  }
 
+  toggleAddFormVisability() {
+    this.showAddForm = !this.showAddForm;
   }
 
   deleteAnnouncement(id: string): void {

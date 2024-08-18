@@ -1,0 +1,12 @@
+<div class="add-announcement">
+  <div class="add-announcement__form">
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="add-form">
+      <h2 class="add-announcement__title">Add Announcement</h2>
+      <app-custom-input [formControl]="addForm.controls['title']"></app-custom-input>
+      <app-custom-input [formControl]="addForm.controls['description']"></app-custom-input>
+      <div class="add-announcement__actions">
+        <button type="submit" class="submit-button" [disabled]="!addForm.valid">Add</button>
+      </div>
+    </form>
+  </div>
+</div>

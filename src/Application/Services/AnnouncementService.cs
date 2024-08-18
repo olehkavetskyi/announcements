@@ -12,10 +12,10 @@ public class AnnouncementService : IAnnouncementService
         _announcementRepository = announcementRepository;
     }
 
-    public async Task AddAsync(Announcement announcement)
+    public async Task<Announcement> AddAsync(Announcement announcement)
     {
-        announcement.DateAdded = DateTime.UtcNow;
         await _announcementRepository.AddAsync(announcement);
+        return await _announcementRepository.GetByIdAsync(announcement.Id);
     }
 
     public async Task UpdateAsync(Announcement announcement)

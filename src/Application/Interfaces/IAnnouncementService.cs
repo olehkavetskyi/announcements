@@ -4,7 +4,7 @@ namespace Application.Interfaces;
 
 public interface IAnnouncementService
 {
-    Task AddAsync(Announcement announcement);
+    Task<Announcement> AddAsync(Announcement announcement);
     Task<List<Announcement>> GetAsync();
     Task<Announcement?> GetByIdAsync(Guid id);
     Task UpdateAsync(Announcement announcement);

@@ -4,3 +4,8 @@ export interface Announcement {
   description: string;
   dateAdded: Date;
 }
+
+export interface AnnouncementToAddDto {
+  title: string;
+  description: string;
+}

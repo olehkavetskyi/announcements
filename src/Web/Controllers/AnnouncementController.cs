@@ -1,8 +1,8 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Formats.Asn1;
-using System.Reflection.Metadata.Ecma335;
+using Web.Dtos;
+using Web.Extensions;
 
 namespace Web.Controllers;
 
@@ -18,10 +18,12 @@ public class AnnouncementController : ControllerBase
     }
 
     [HttpPost("add")]
-    public async Task<IActionResult> AddAnnouncementAsync(Announcement announcement)
+    public async Task<IActionResult> AddAnnouncementAsync(AnnouncementDto announcement)
     {
-        await _announcementService.AddAsync(announcement);
-        return Ok(announcement);
+        // var result
+
+        var result = await _announcementService.AddAsync(announcement.ToEntitity());
+        return Ok(result);
     }
 
     [HttpGet("all")]

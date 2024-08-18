@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
   ],
   providers: [
     AnnouncementService,
-    TimeService
+    TimeService,
   ],
   templateUrl: './edit-announcement.component.html',
   styleUrl: './edit-announcement.component.scss'
