@@ -30,6 +30,12 @@ public class AnnouncementController : ControllerBase
         return Ok(await _announcementService.GetAsync());
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAnnouncementByIdAsync(Guid id)
+    {
+        return Ok(await _announcementService.GetByIdAsync(id));
+    }
+
     [HttpGet("similar/{id}")]
     public async Task<IActionResult> GetSimilarAnnouncementsAsync(Guid id)
     {
