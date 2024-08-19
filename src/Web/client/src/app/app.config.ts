@@ -16,14 +16,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()), 
     provideClientHydration(),
     provideAnimations(), 
-    provideToastr(),
     provideHttpClient(
       withFetch(),
       withInterceptors([loadingInterceptor]),
       ), 
     provideAnimationsAsync(),
     importProvidersFrom(NgxSpinnerModule.forRoot()),
-    provideAnimations(),
     provideToastr({
       timeOut: 2000,
       positionClass: 'toast-top-right',

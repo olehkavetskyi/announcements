@@ -4,7 +4,7 @@ import { AnnouncementService } from '../../services/announcement.service';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TimeService } from '../../../shared/services/time.service';
 import {Location} from '@angular/common'; 
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   imports: [
     CustomInputComponent,
     ReactiveFormsModule,
-    RouterModule,
+    RouterLink,
   ],
   providers: [
     AnnouncementService,

@@ -3,7 +3,7 @@ import { AnnouncementService } from '../../services/announcement.service';
 import { Announcement } from '../../models/announcement';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { AddAnnouncementComponent } from "../add-announcement/add-announcement.component";
 import { ToastrService } from 'ngx-toastr';
 
@@ -12,14 +12,12 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [
     DatePipe,
-    MatIconModule,
+    MatIconModule, 
+    RouterLink,
     AddAnnouncementComponent,
-    CommonModule, RouterModule,
-    AddAnnouncementComponent
 ],
   providers: [
     AnnouncementService,
-
   ],
   templateUrl: './announcement-list.component.html',
   styleUrl: './announcement-list.component.scss'
@@ -38,6 +36,10 @@ export class AnnouncementListComponent implements OnInit {
     this.announcementService.getAllAnnouncements().subscribe({
       next: (response) => this.announcementList = response
     });
+  }
+  
+  click() {
+    console.log('click, click');
   }
 
   onAnnouncementAdded(announcement: Announcement): void {
