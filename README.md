@@ -43,4 +43,6 @@ Make sure you have the following installed:
 ```bash
   ng serve -o
 ```
+
+It should open at http://localhost:4200.
  
