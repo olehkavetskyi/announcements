@@ -20,8 +20,6 @@ public class AnnouncementController : ControllerBase
     [HttpPost("add")]
     public async Task<IActionResult> AddAnnouncementAsync(AnnouncementDto announcement)
     {
-        // var result
-
         var result = await _announcementService.AddAsync(announcement.ToEntitity());
         return Ok(result);
     }

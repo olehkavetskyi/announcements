@@ -26,6 +26,7 @@
             <th>Description</th>
             <th>Date</th>
             <th>Edit</th>
+            <th>Details</th>
             <th>Delete</th>
           </tr>
         </thead>
@@ -38,6 +39,11 @@
             <td class="announcement-list__table-cell announcement-list__controll-table-cell">
               <a [routerLink]="['/announcements', announcement.id, 'edit']" mat-fab class="announcement-list__edit-btn">
                 <mat-icon>edit</mat-icon>
+              </a>
+            </td>
+            <td class="announcement-list__table-cell announcement-list__controll-table-cell">
+              <a [routerLink]="['/announcements', announcement.id, 'details']" mat-fab class="announcement-list__details-btn">
+                <mat-icon>info</mat-icon>
               </a>
             </td>
             <td class="announcement-list__table-cell announcement-list__controll-table-cell">

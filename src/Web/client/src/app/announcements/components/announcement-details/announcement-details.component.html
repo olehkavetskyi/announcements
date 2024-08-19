@@ -1,0 +1,17 @@
+<div class="announcement-details">
+  <div class="announcement-details__header">
+    <h2>Announcement Details</h2>
+  </div>
+  <div class="announcement-details__content">
+    <p><span>Title:</span> {{announcement?.title}}</p>
+    <p><span>Description:</span> {{announcement?.description}}</p>
+    <p><span>Date Added:</span> {{announcement?.dateAdded | date: 'medium'}}</p>
+  </div>
+  <div class="announcement-details__actions">
+    <a routerLink="/" class="announcement-details__list-link">To The Announcement List</a>
+    <a [routerLink]="['/announcements', announcement?.id, 'edit']" class="announcement-details__edit-link">Edit</a>
+    <button (click)="deleteAnnouncement(announcement?.id)" class="announcement-details__delete-btn">
+      Delete
+    </button>
+  </div>
+</div>
