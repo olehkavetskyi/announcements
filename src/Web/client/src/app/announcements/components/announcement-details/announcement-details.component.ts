@@ -3,6 +3,7 @@ import { AnnouncementService } from '../../services/announcement.service';
 import { Announcement } from '../../models/announcement';
 import { Router, RouterModule } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-announcement-details',
@@ -23,16 +24,14 @@ export class AnnouncementDetailsComponent implements OnInit {
 
   @Input() id!: string;
 
-  constructor(private announcementService: AnnouncementService, private router: Router) {}
+  constructor(private announcementService: AnnouncementService, private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.announcementService.getAnnouncementById(this.id).subscribe({
       next: (result) => { 
         this.announcement = result;
       },
-      error: (error) => {
-        console.log(error);
-      }
+      error: () => this.toastr.error("Oops! Something went wrong!")
     })
     }
 

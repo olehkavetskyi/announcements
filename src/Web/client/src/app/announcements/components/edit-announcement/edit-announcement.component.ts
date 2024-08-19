@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 import { TimeService } from '../../../shared/services/time.service';
 import {Location} from '@angular/common'; 
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-announcement',
@@ -26,6 +27,7 @@ export class EditAnnouncementComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private announcementService: AnnouncementService, 
+    private toast: ToastrService,
     private timeService: TimeService,
     private location: Location) {}
 
@@ -53,7 +55,7 @@ export class EditAnnouncementComponent implements OnInit {
           dateAdded: formattedDate, 
         });
       },
-      error: (error) => console.error(error)
+      error: (error) => this.toast.error("Oops! An error occurred while retrieving the announcement!")
     });
   }
 
@@ -61,10 +63,10 @@ export class EditAnnouncementComponent implements OnInit {
     (this.editForm as any).addControl('id', new FormControl(this.id, Validators.required));
     this.announcementService.editAnnouncement(this.editForm.value).subscribe({
       next: () => {
-        console.log('success');
+        this.toast.success("Announcement successfully updated!");
         this.location.back();
       },
-      error: (err) => console.log(err)
+      error: (err) =>this.toast.error("Oops! Something went wrong!")
     });
   }
 }

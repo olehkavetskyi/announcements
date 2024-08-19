@@ -5,6 +5,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { AddAnnouncementComponent } from "../add-announcement/add-announcement.component";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-announcement-list',
@@ -27,7 +28,7 @@ export class AnnouncementListComponent implements OnInit {
   announcementList: Announcement[] = [];
   showAddForm: boolean = false;
 
-  constructor(private announcementService: AnnouncementService) {}
+  constructor(private announcementService: AnnouncementService,  private toastr: ToastrService) {}
 
   ngOnInit(): void {
       this.getAnnouncementList();
@@ -36,7 +37,7 @@ export class AnnouncementListComponent implements OnInit {
   getAnnouncementList(): void {
     this.announcementService.getAllAnnouncements().subscribe({
       next: (response) => this.announcementList = response,
-      error: (err) => console.log('err')
+      error: (err) => this.toastr.error("Oops! An error occurred while retrieving announcements!")
     });
   }
 
@@ -56,9 +57,9 @@ export class AnnouncementListComponent implements OnInit {
     this.announcementService.deleteAnnouncement(id).subscribe({
       next: (responese) => {
         this.announcementList = this.announcementList.filter(a => a.id !== id);
-        console.log('success');
+        this.toastr.success("Successfully deleted");
       },
-      error: (err) => console.log('fail')
+      error: (err) => this.toastr.error("Oops! Something went wrong!")
     });
   }
 }
