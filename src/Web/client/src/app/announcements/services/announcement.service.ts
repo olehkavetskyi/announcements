@@ -16,8 +16,12 @@ export class AnnouncementService {
     return this.http.get<Announcement[]>(`${this.apiUrl}/announcement/all`);
   }
 
-  getAnnouncementById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/announcement/${id}`);
+  getSimilarAnnouncements(id: string): Observable<Announcement[]> {
+    return this.http.get<Announcement[]>(`${this.apiUrl}/announcement/similar/${id}`);
+  }
+
+  getAnnouncementById(id: string): Observable<Announcement> {
+    return this.http.get<Announcement>(`${this.apiUrl}/announcement/${id}`);
   }
 
   addAnnouncement(announcement: AnnouncementToAddDto): Observable<any> {

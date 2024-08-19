@@ -4,6 +4,7 @@ import { Announcement } from '../../models/announcement';
 import { Router, RouterLink, } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-announcement-details',
@@ -11,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   imports: [
     RouterLink,
     DatePipe,
+    MatIconModule,
   ],
   providers: [ 
     AnnouncementService,
@@ -20,6 +22,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AnnouncementDetailsComponent implements OnInit {
   announcement: Announcement | undefined;
+  showSimilarAnnouncements = false;
+  similarAnnouncements: Announcement[] = [];
 
   @Input() id!: string;
 
@@ -36,7 +40,17 @@ export class AnnouncementDetailsComponent implements OnInit {
       },
       error: () => this.toastr.error("Oops! An error occurred while retrieving the announcement!")
     })
-    }
+  }
+
+  findSimilarAnnouncements() {
+    this.announcementService.getSimilarAnnouncements(this.id).subscribe({
+      next: (result) => {
+        this.showSimilarAnnouncements = true;
+        this.similarAnnouncements = result
+      },
+      error: () => this.toastr.error("Oops! An error occurred while retrieving similar announcements!")
+    });
+  }
 
     deleteAnnouncement(id: string | undefined) {
       let self = this;

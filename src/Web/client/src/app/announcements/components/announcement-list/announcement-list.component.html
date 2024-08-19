@@ -42,7 +42,7 @@
               </a>
             </td>
             <td class="announcement-list__table-cell announcement-list__controll-table-cell">
-              <a (click)="click()" [routerLink]="['/announcements', announcement.id, 'details']" mat-fab class="announcement-list__details-btn">
+              <a [routerLink]="['/announcements', announcement.id, 'details']" mat-fab class="announcement-list__details-btn">
                 <mat-icon>info</mat-icon>
               </a>
             </td>

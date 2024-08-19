@@ -13,5 +13,42 @@
     <button (click)="deleteAnnouncement(announcement?.id)" class="announcement-details__delete-btn">
       Delete
     </button>
+    <button (click)="findSimilarAnnouncements()" class="announcement-details__find-btn">
+      Find Similar Anouncements
+    </button>
+  </div>
+
+  <div class="announcement-detais__similars">
+
+    @if (showSimilarAnnouncements) {
+      <div class="announcement-details__header">
+        <h2>Similar Announcements</h2>
+      </div>
+      @if(similarAnnouncements.length > 0) {
+
+        <table class="announcement-list__table">
+          <thead class="announcement-list__table-head">
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Date Added </th>
+            </tr>
+          </thead>
+          <tbody class="announcement-list__table-body">
+      
+        @for (announcement of similarAnnouncements; track announcement.id) {
+          <tr class="announcement-list__table-row">
+            <td class="announcement-list__table-cell">{{ announcement.title }}</td>
+            <td class="announcement-list__table-cell">{{ announcement.description }}</td>
+            <td class="announcement-list__table-cell">{{ announcement.dateAdded | date}} </td>
+        }
+          </tbody>
+        </table>
+      } @else {
+        <div class="announcement-details__header">
+          <h3>Similar Announcements Not Found</h3>
+        </div>
+      }
+    } 
   </div>
 </div>

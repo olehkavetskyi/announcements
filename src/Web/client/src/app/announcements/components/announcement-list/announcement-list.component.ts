@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnnouncementService } from '../../services/announcement.service';
 import { Announcement } from '../../models/announcement';
-import { CommonModule, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { AddAnnouncementComponent } from "../add-announcement/add-announcement.component";
@@ -36,10 +36,6 @@ export class AnnouncementListComponent implements OnInit {
     this.announcementService.getAllAnnouncements().subscribe({
       next: (response) => this.announcementList = response
     });
-  }
-  
-  click() {
-    console.log('click, click');
   }
 
   onAnnouncementAdded(announcement: Announcement): void {
