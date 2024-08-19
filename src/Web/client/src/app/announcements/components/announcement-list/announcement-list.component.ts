@@ -36,13 +36,11 @@ export class AnnouncementListComponent implements OnInit {
 
   getAnnouncementList(): void {
     this.announcementService.getAllAnnouncements().subscribe({
-      next: (response) => this.announcementList = response,
-      error: (err) => this.toastr.error("Oops! An error occurred while retrieving announcements!")
+      next: (response) => this.announcementList = response
     });
   }
 
   onAnnouncementAdded(announcement: Announcement): void {
-    console.log('hello')
     this.announcementList = [
       ...this.announcementList,
       announcement
@@ -59,7 +57,7 @@ export class AnnouncementListComponent implements OnInit {
         this.announcementList = this.announcementList.filter(a => a.id !== id);
         this.toastr.success("Successfully deleted");
       },
-      error: (err) => this.toastr.error("Oops! Something went wrong!")
+      error: (err) => this.toastr.error("Oops! An error occurred while deleting the announcement!")
     });
   }
 }

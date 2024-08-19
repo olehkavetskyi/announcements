@@ -31,7 +31,7 @@ export class AnnouncementDetailsComponent implements OnInit {
       next: (result) => { 
         this.announcement = result;
       },
-      error: () => this.toastr.error("Oops! Something went wrong!")
+      error: () => this.toastr.error("Oops! An error occurred while retrieving the announcement!")
     })
     }
 

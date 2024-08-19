@@ -42,7 +42,7 @@ export class AddAnnouncementComponent {
           description: '',
         })
       },
-      error: () =>  this.toastr.error("Oops! Something went wrong!")
+      error: () =>  this.toastr.error("Oops! An Error occured while adding the announcement!")
     });
   }
 }

@@ -66,7 +66,7 @@ export class EditAnnouncementComponent implements OnInit {
         this.toast.success("Announcement successfully updated!");
         this.location.back();
       },
-      error: (err) =>this.toast.error("Oops! Something went wrong!")
+      error: (err) =>this.toast.error("Oops! An error occurred while updating the announcement!")
     });
   }
 }
